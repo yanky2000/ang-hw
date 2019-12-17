@@ -1,8 +1,40 @@
 <p>words-list works!</p>
 <ul>
-    <li *ngFor="let word of words">{{word}}</li>
+  <li *ngFor="let word of words">{{ word }}</li>
 </ul>
-<form action="">
-    <input type="text" name="" id="new-word-input" placeholder="type word here" (onchange)="handleInputChange($event)">
-    <button type="submit"> Submit</button>
+
+<form action="" #searchForm="ngForm" (ngSubmit)="onSubmit()" method="post">
+  <label for="search">Search</label>
+  <input
+    type="search"
+    value="cookie"
+    required
+    name="search"
+    [(ngModel)]="searchString"
+    id="search"
+  />
+  <button type="submit">Submit</button>
 </form>
+<!-- Reactive Forms -->
+<h1>Reactive Forms</h1>
+<form>
+  <label>
+    Name:
+
+    <input type="text" name="" [formControl]="name" id="" />
+  </label>
+  <button (click)="updateName()">Update Name</button>
+</form>
+{{ name.value }}
+<!-- <input type="text" value="cookie" name="search" id="search2" /> -->
+<!-- {{ searchString }} -->
+<!-- <form action=""> -->
+<!-- <input
+    type="text"
+    name=""
+    id="new-word-input"
+    placeholder="type word here"
+    (onchange)="handleInputChange($event)"
+  /> -->
+<!-- <button type="submit"> Submit</button> -->
+<!-- </form> -->

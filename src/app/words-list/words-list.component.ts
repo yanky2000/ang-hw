@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from "@angular/core";
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: "app-words-list",
@@ -13,8 +14,10 @@ export class WordsListComponent implements OnInit {
   @Input() words: Array<string>;
 
   handleInputChange(event) {
-    console.log(event, 2)
-
-
+    console.log(event, 2);
   }
+  searchString = "";
+  onSubmit() { console.log('submit')}
+  name = new FormControl()
+  updateName() {this.name.setValue('new val!!!')}
 }
