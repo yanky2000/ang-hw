@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FormControl } from '@angular/forms';
+import { TranslateService } from "../translate.service";
 
 @Component({
   selector: "app-words-list",
@@ -7,17 +7,24 @@ import { FormControl } from '@angular/forms';
   styleUrls: ["./words-list.component.css"]
 })
 export class WordsListComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-
-  @Input() words: Array<string>;
-
-  handleInputChange(event) {
-    console.log(event, 2);
+  constructor(private translateService: TranslateService) {
+    this.words = this.translateService.getAllWords();
   }
-  searchString = "";
-  onSubmit() { console.log('submit')}
-  name = new FormControl()
-  updateName() {this.name.setValue('new val!!!')}
+
+
+  // @Input() words: Array<string>;
+
+  words = [];
+  // searchString = "";
+  ngOnInit() {}
+  // onSubmit() {
+  //   console.log("submit");
+  // }
+  // name = new FormControl();
+  // updateName() {
+  //   this.name.setValue("new val!!!");
+  // }
+  addNewWord() {
+    console.log("new");
+  }
 }

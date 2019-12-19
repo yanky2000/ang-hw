@@ -1,10 +1,20 @@
-<p>words-list works!</p>
+<h1>Word List</h1>
 <ul>
-  <li *ngFor="let word of words">{{ word }}</li>
+  <li *ngFor="let word of words">{{ word.dict.ru }} -{{ word.dict.en }}</li>
 </ul>
+<button (click)="addNewWord()">Add new word</button>
+<section><h2>Add new word</h2>
+
+<form action="">
+  <label for="newWord">New word:</label>
+  <input type="text" name="newWord" id="newWord" [(ngModel)]="newWord">
+</form>
+
+
+</section>
 
 <!-- Template driven forms -->
-<form action="" #searchForm="ngForm" (ngSubmit)="onSubmit()" method="post">
+<!-- <form action="" #searchForm="ngForm" (ngSubmit)="onSubmit()" method="post">
   <label for="search">Search</label>
   <input
     type="search"
@@ -15,10 +25,10 @@
     id="search"
   />
   <button type="submit">Submit</button>
-</form>
+</form> -->
 
 <!-- Reactive Forms -->
-<h1>Reactive Forms</h1>
+<!-- <h1>Reactive Forms</h1>
 <form>
   <label>
     Name:
@@ -27,7 +37,7 @@
   </label>
   <button (click)="updateName()">Update Name</button>
 </form>
-{{ name.value }}
+{{ name.value }} -->
 <!-- <input type="text" value="cookie" name="search" id="search2" /> -->
 <!-- {{ searchString }} -->
 <!-- <form action=""> -->
