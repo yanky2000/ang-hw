@@ -3,6 +3,7 @@
   <li *ngFor="let word of words">{{ word }}</li>
 </ul>
 
+<!-- Template driven forms -->
 <form action="" #searchForm="ngForm" (ngSubmit)="onSubmit()" method="post">
   <label for="search">Search</label>
   <input
@@ -15,6 +16,7 @@
   />
   <button type="submit">Submit</button>
 </form>
+
 <!-- Reactive Forms -->
 <h1>Reactive Forms</h1>
 <form>

@@ -14,7 +14,6 @@ import { EditorComponent } from "./editor/editor.component";
 @NgModule({
   declarations: [
     AppComponent,
-    // WordList,
     MyPipePipe,
     MyDirectiveDirective,
     WordChallengeComponent,

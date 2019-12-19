@@ -1,1 +1,35 @@
-<p>settings works!</p>
+<section>
+  <h1>Settings</h1>
+  <form class="settings" action="">
+
+    <label for="language">
+      Language:
+    </label>
+    <select class="input" name="language" id="language" [(ngModel)]="language" >
+      <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
+    </select>
+    <label for="wordsNum">Number of words:</label>
+    <input class="input" type="number" name="numOfWords" id="" min="1" [(ngModel)]="numOfWords"/>
+    <label for="time">Time for challenge, sec:</label>
+    <input class="input" type="number" name="challengeTime" id="time" min="1" [(ngModel)]='challengeTime'/>
+    <button (onClick)="onSubmit()">Apply</button>
+  </form>
+  {{challengeTime}}
+  {{languages[0]}}
+  {{numOfWords}}
+  {{language}}
+</section>
+
+<style>
+  label {
+    margin-top: 8px;
+  }
+  .settings {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input {
+    width: 200px;
+  }
+</style>
