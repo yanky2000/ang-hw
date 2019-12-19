@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
+import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from "./app.component";
 import { MyPipePipe } from "./my-pipe.pipe";
 import { MyDirectiveDirective } from "./my-directive.directive";
@@ -21,7 +22,13 @@ import { EditorComponent } from "./editor/editor.component";
     WordsListComponent,
     EditorComponent
   ],
-  imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    FormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

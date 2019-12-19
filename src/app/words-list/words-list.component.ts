@@ -22,6 +22,10 @@ export class WordsListComponent implements OnInit {
     console.log(`submitting ${this.newWord}`);
     // this.translateService();
   }
+  trans() {
+    console.log("translating");
+    this.translateService.fetchTranslation(this.newWord);
+  }
   // name = new FormControl();
   // updateName() {
   //   this.name.setValue("new val!!!");
