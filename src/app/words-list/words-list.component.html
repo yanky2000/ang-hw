@@ -2,12 +2,16 @@
 <ul>
   <li *ngFor="let word of words">{{ word.dict.ru }} -{{ word.dict.en }}</li>
 </ul>
-<button (click)="addNewWord()">Add new word</button>
-<section><h2>Add new word</h2>
+<button (click)="toggleFormVisibility()">Add new wbrd</button>
 
-<form action="">
+
+<section *ngIf='formIsVisible'><h2>Add new word</h2>
+
+<form action="" (ngSubmit)="onSubmit()">
   <label for="newWord">New word:</label>
-  <input type="text" name="newWord" id="newWord" [(ngModel)]="newWord">
+  <input type="text" name="newWord" required id="newWord" [(ngModel)]="newWord">
+  <div>{{newWord.translation}} </div>
+  <button [disabled]="!newWord.length"  type="submit">add word</button>
 </form>
 
 

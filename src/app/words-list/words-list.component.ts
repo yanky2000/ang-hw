@@ -11,20 +11,26 @@ export class WordsListComponent implements OnInit {
     this.words = this.translateService.getAllWords();
   }
 
-
   // @Input() words: Array<string>;
 
   words = [];
+  formIsVisible = false;
+  newWord = "";
   // searchString = "";
   ngOnInit() {}
-  // onSubmit() {
-  //   console.log("submit");
-  // }
+  onSubmit() {
+    console.log(`submitting ${this.newWord}`);
+    // this.translateService();
+  }
   // name = new FormControl();
   // updateName() {
   //   this.name.setValue("new val!!!");
   // }
   addNewWord() {
     console.log("new");
+  }
+
+  toggleFormVisibility() {
+    this.formIsVisible = !this.formIsVisible;
   }
 }
