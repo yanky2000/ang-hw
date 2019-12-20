@@ -13,9 +13,10 @@
   <!-- <div>{{newWord.translation}}</div> -->
   {{newWord}}
   <button [disabled]="!newWord.length"  type="submit">add word</button>
-  <button (click)="trans()">Translate to English</button>
+  <button (click)="gett()">Translate to English</button>
 </form>
 
+  {{translatedWord}}
 
 </section>
 

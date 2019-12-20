@@ -14,7 +14,7 @@ export class TranslateService {
   url = "https://translate.yandex.net/api/v1.5/tr.json/translate";
   apiKey =
     "trnsl.1.1.20191219T175535Z.a8f7c538ee433210.bf031d9de146dd06ce73efca542cc93eb7a18f36";
-
+translatedWord = ''
   translateToLang = "ru-en";
 
   getAllWords() {
@@ -23,6 +23,11 @@ export class TranslateService {
   fetchTranslation(text: string) {
     return this.httpClient.get(
       `${this.url}?key=${this.apiKey}&text=${text}&lang=${this.translateToLang}`
-    ).subscribe(res => console.log(res));
+    )  }
+  ffetchTranslation(text: string) {
+    return this.httpClient.get(
+      `${this.url}?key=${this.apiKey}&text=${text}&lang=${this.translateToLang}`
+    )
   }
+
 }
