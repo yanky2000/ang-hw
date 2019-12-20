@@ -5,8 +5,9 @@
       Language:
     </label>
     <select class="input" name="language" id="language" [(ngModel)]="language">
-      <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
+      <option *ngFor="let lang of languages" [value]="settings.language.name">{{ lang}}</option>
     </select>
+
     <label for="wordsNum">Number of words:</label>
     <input
       class="input"
@@ -16,6 +17,7 @@
       min="1"
       [(ngModel)]="numOfWords"
     />
+    
     <label for="time">Time for challenge, sec:</label>
     <input
       class="input"

@@ -1,14 +1,14 @@
-import { IDict } from './../model/models';
+import { IDict } from "./../model/models";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { INewWord } from "src/model/models";
+import { IWord } from "src/model/models";
 
 @Injectable({
   providedIn: "root"
 })
 export class TranslateService {
   constructor(private httpClient: HttpClient) {}
-  initWords = [
+  initWords: IWord[] = [
     { id: 1, dict: { ru: "Образование", en: "Education" } },
     { id: 2, dict: { ru: "План", en: "Plan" } },
     { id: 3, dict: { ru: "Работа", en: "Work" } }
@@ -29,8 +29,8 @@ export class TranslateService {
   }
 
   addWord(newWord: IDict) {
-    const id = Date.now();
-    this.initWords.push({dict: {...newWord}, id});
-    console.log(this.initWords)
+    const newWordToAdd: IWord = { id: Date.now(), dict: { ...newWord } };
+    this.initWords.push(newWordToAdd);
+    console.log(this.initWords);
   }
 }

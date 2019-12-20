@@ -1,8 +1,9 @@
-import { Languages } from "./../constants";
+import { LanguageKeys } from "./../constants";
+
 export interface ITranslation {
   text: string[];
 }
-export interface INewWord {
+export interface IWord {
   id: number;
   dict: IDict;
 }
@@ -18,4 +19,4 @@ export interface ISettings {
   challengeNo: number;
 }
 
-export type ILanguages = keyof typeof Languages;
+export type ILanguages = keyof typeof LanguageKeys;
