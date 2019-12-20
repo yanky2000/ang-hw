@@ -1,4 +1,21 @@
-<h1>Word Challenge</h1>
+\<h1>Word Challenge</h1>
 
 <!-- <div *ngFor='let word of initData'>{{word.dictdd.ru}}  - {{word.dict.en}}</div> -->
-<div *ngFor='let word of words'>{{word.dict.ru}}  - {{word.dict.en}}</div>
+<!-- <div *ngFor="let word of words">{{ word.dict.ru }} - {{ word.dict.en }}</div> -->
+<div>
+ Challenge {{currentChallenge.no}}
+</div>
+
+<div class='challenge-task'>
+  {{ currentChallenge.word.dict.ru }}
+</div>
+
+<form (ngSubmit)="onSubmit()">
+  <label for="word">по английски будет? </label>
+  <input type="text" name="" required placeholder='Введите здесь ответ' id="word" />
+  <button type="submit">Submit</button>
+</form>
+
+<div class="challenge-error" *ngIf='isError'>
+    Неверно. Попробуйте еще раз!
+</div>

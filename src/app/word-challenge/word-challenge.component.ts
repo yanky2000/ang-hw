@@ -12,6 +12,7 @@ export class WordChallengeComponent implements OnInit {
   }
 
   words = [];
+  
 
   ngOnInit() {}
 }
