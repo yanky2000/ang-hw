@@ -1,0 +1,22 @@
+<section>
+  <form action="" (ngSubmit)="onSubmit()">
+    <label for="newWord">New word:</label>
+    <input
+      type="search"
+      name="newWord"
+      #searchWord
+      required
+      id="newWord"
+      [(ngModel)]="newWord"
+    />
+    <span *ngIf="isSearching">translating...</span>
+    <div *ngIf="translatedWord.length">
+      {{ feedback() }}
+    </div>
+    <div>
+      <button [disabled]="!translatedWord.length" type="submit">
+        add word
+      </button>
+    </div>
+  </form>
+</section>
