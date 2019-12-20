@@ -1,6 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { ITranslation } from "./../../model/models";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { TranslateService } from "../translate.service";
-import { ITranslation } from "../../model/models";
+import { of, fromEvent } from "rxjs";
+import {
+  debounceTime,
+  map,
+  distinctUntilChanged,
+  filter
+} from "rxjs/operators";
 
 @Component({
   selector: "app-words-list",
@@ -8,42 +15,59 @@ import { ITranslation } from "../../model/models";
   styleUrls: ["./words-list.component.css"]
 })
 export class WordsListComponent implements OnInit {
+  @ViewChild("searchWord", { static: true }) searchWord: ElementRef;
   constructor(private translateService: TranslateService) {
+    this.isSearching = false;
     this.words = this.translateService.getAllWords();
     this.translatedWord = this.translateService.translatedWord;
   }
 
-  // @Input() words: Array<string>;
-
+  isSearching = false;
   words = [];
   formIsVisible = false;
   translatedWord = "";
   newWord = "";
   translated: any = "";
-  // searchString = "";
-  ngOnInit() {}
-  onSubmit() {
-    console.log(`submitting ${this.newWord}`);
-    // this.translateService();
-  }
-  trans() {
-    this.translated = this.translateService.fetchTranslation(this.newWord);
-    console.log(this.translated);
-  }
-  gett() {
-    this.translateService
-      .fetchTranslation(this.newWord)
-      .subscribe((res: ITranslation) => {
-        this.translatedWord = res.text[0];
-        console.log(res);
+
+  ngOnInit() {
+    fromEvent(this.searchWord.nativeElement, "keyup")
+      .pipe(
+        // get value
+        map((event: any) => {
+          return event.target.value;
+        }),
+        // if character length greater then 2
+        filter(res => res.length > 2),
+        // Time in milliseconds between key events
+        debounceTime(1000),
+        // If previous query is diffent from current
+        distinctUntilChanged()
+        // subscription for response
+      )
+      .subscribe((text: string) => {
+        this.isSearching = true;
+        this.translatedWord = "";
+        this.getTranslation(text).subscribe(
+          (res: ITranslation) => {
+            console.log("res", res);
+            this.isSearching = false;
+            this.translatedWord = res.text[0];
+          },
+          err => {
+            this.isSearching = false;
+            console.log("error", err);
+          }
+        );
       });
   }
-  // name = new FormControl();
-  // updateName() {
-  //   this.name.setValue("new val!!!");
-  // }
-  addNewWord() {
-    console.log("new");
+
+  onSubmit() {
+    const newWord = { ru: this.newWord, en: this.translatedWord };
+    this.translateService.addWord(newWord);
+  }
+
+  getTranslation(str?: string) {
+    return this.translateService.fetchTranslation(this.newWord);
   }
 
   toggleFormVisibility() {
