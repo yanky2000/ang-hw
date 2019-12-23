@@ -19,7 +19,7 @@ export class TranslateService {
   translatedWord = "";
   translateToLang = "ru-en";
 
-  getAllWords() {
+  getAllWords(): IWord[] {
     return this.initWords;
   }
   fetchTranslation(text: string) {

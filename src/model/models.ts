@@ -15,8 +15,10 @@ export interface IDict {
 
 export interface ISettings {
   time: number;
-  language: ILanguages;
+  currentLanguage: ILanguages;
   challengeNo: number;
+  numOfWords: number;
+  languages: ILanguages[];
 }
 
 export type ILanguages = keyof typeof LanguageKeys;

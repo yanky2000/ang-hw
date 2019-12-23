@@ -1,11 +1,11 @@
 <section class="settings">
   <h1>Settings</h1>
-  <form action="" class="settings">
+  <form action="" (ngSubmit)="onSubmit()" class="settings">
     <label for="language">
       Language:
     </label>
-    <select class="input" name="language" id="language" [(ngModel)]="language">
-      <option *ngFor="let lang of languages" [value]="settings.language.name">{{ lang}}</option>
+    <select class="input" name="language" id="language" [value]="ru" [(ngModel)]="settings.currentLanguage">
+      <option *ngFor="let lang of settings.languages" >{{ lang}}</option>
     </select>
 
     <label for="wordsNum">Number of words:</label>
@@ -13,9 +13,9 @@
       class="input"
       type="number"
       name="numOfWords"
-      id=""
+      id="wordsNum"
       min="1"
-      [(ngModel)]="numOfWords"
+      [(ngModel)]="settings.numOfWords"
     />
     
     <label for="time">Time for challenge, sec:</label>
@@ -25,12 +25,11 @@
       name="challengeTime"
       id="time"
       min="1"
-      [(ngModel)]="challengeTime"
+      [(ngModel)]="settings.time"
     />
     <button (onClick)="onSubmit()">Apply</button>
   </form>
   {{ challengeTime }}
-  {{ languages[0] }}
   {{ numOfWords }}
   {{ language }}
 </section>

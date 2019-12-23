@@ -5,8 +5,8 @@ export enum SettingProperties {
 }
 
 export enum LanguageKeys {
-  ru,
-  en
+  ru = "ru",
+  en = "en"
 }
 export const langMap = {
   [LanguageKeys.ru]: { name: "Russian", key: "ru" },

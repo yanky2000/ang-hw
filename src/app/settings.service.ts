@@ -1,4 +1,4 @@
-import { LanguageKeys } from "./../constants";
+import { LanguageKeys, langMap } from "./../constants";
 import { Injectable } from "@angular/core";
 import { SettingProperties } from "src/constants";
 import { ISettings } from "src/model/models";
@@ -9,7 +9,13 @@ import { ISettings } from "src/model/models";
 export class SettingsService {
   settings: ISettings;
   constructor() {
-    this.settings = { challengeNo: 0, time: 0, language: LanguageKeys.ru };
+    this.settings = {
+      challengeNo: 1,
+      numOfWords: 3,
+      time: 10,
+      currentLanguage: LanguageKeys.ru,
+      languages: [LanguageKeys.ru, LanguageKeys.en]
+    };
   }
 
   getChallengeTime() {
@@ -19,8 +25,9 @@ export class SettingsService {
     return this.settings.challengeNo;
   }
   getChallengeLange() {
-    return this.settings.language;
+    return this.settings.currentLanguage;
   }
+
   getSettings(): ISettings {
     return this.settings;
   }

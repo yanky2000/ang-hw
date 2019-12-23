@@ -3,19 +3,29 @@
 <!-- <div *ngFor='let word of initData'>{{word.dictdd.ru}}  - {{word.dict.en}}</div> -->
 <!-- <div *ngFor="let word of words">{{ word.dict.ru }} - {{ word.dict.en }}</div> -->
 <div>
- <!-- Challenge {{currentChallenge.no}} -->
+  <!-- Challenge {{currentChallenge.no}} -->
 </div>
 
-<div class='challenge-task'>
+<div class="challenge-task">
   <!-- {{ currentChallenge.word.dict.ru }} -->
 </div>
-
-<form (ngSubmit)="onSubmit()">
-  <label for="word">по английски будет? </label>
-  <input type="text" name="" required placeholder='Введите здесь ответ' id="word" />
-  <button type="submit">Submit</button>
+<!-- {{ settings.currentLanguage }} -->
+<form (ngSubmit)="onSubmit()" #challengeForm="ngForm">
+  <!-- <div *ngFor="let word of getChallengeWords()"> -->
+    {{ word() }}
+    <label for="word"> - </label>
+    <input
+      type="text"
+      name="word"
+      required
+      placeholder="Введите здесь ответ"
+      id="word"
+      [(ngModel)] = 'response[word()]'
+    />
+    <button type="submit" [disabled]='!challengeForm.form.valid'>Submit</button>
+  <!-- </div> -->
 </form>
 
-<div class="challenge-error" *ngIf='isError'>
-    Неверно. Попробуйте еще раз!
+<div class="challenge-error" *ngIf="isError">
+  Неверно. Попробуйте еще раз!
 </div>
