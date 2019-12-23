@@ -12,6 +12,8 @@ import { WordsListComponent } from "./words-list/words-list.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { EditorComponent } from "./editor/editor.component";
 import { AddWordComponent } from './add-word/add-word.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AddWordComponent } from './add-word/add-word.component';
     SettingsComponent,
     WordsListComponent,
     EditorComponent,
-    AddWordComponent
+    AddWordComponent,
+    PageNotFoundComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
