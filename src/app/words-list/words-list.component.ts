@@ -7,8 +7,10 @@ import { TranslateService } from "../translate.service";
   styleUrls: ["./words-list.component.css"]
 })
 export class WordsListComponent implements OnInit {
+  dict: any
   constructor(private translateService: TranslateService) {
     this.words = this.translateService.getAllWords();
+    this.dict = this.translateService.getAllWords2();
   }
 
   words = [];

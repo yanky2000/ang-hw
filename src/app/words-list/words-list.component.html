@@ -6,5 +6,8 @@
 <button (click)="toggleFormVisibility()">
   {{ formIsVisible ? "Hide" : "Show" }} form
 </button>
-
+<!-- <div *ngFor='let wo of dict'>
+  {{wo}}
+</div> -->
+{{dict.ru}}
 <app-add-word *ngIf="formIsVisible"></app-add-word>
