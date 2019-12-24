@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "../translate.service";
 import { SettingsService } from "../settings.service";
-import { ISettings, IWord } from "src/model/models";
+import { ISettings, IDictionary } from "src/model/models";
 
 @Component({
   selector: "app-word-challenge",
@@ -10,20 +10,20 @@ import { ISettings, IWord } from "src/model/models";
 })
 export class WordChallengeComponent implements OnInit {
   settings: ISettings;
-  words: IWord[];
+  words: IDictionary;
   response: any;
 
   constructor(
     private translateService: TranslateService,
     private settingsService: SettingsService
   ) {
-    this.words = this.translateService.getAllWords();
+    this.words = this.translateService.getWords();
     this.settings = this.settingsService.getSettings();
     this.response = {};
   }
-// TODO: 1. Get current challenge No from route, 
-// 2. display current challenge word according to router No
-// 3. Go to next challenge if translation is correct.
+  // TODO: 1. Get current challenge No from route,
+  // 2. display current challenge word according to router No
+  // 3. Go to next challenge if translation is correct.
 
   getChallengeWords() {
     let challengCount = 0;
@@ -33,7 +33,7 @@ export class WordChallengeComponent implements OnInit {
       if (challengCount > this.settings.numOfWords) {
         return;
       }
-      challengeWords.push(word.dict[this.settings.currentLanguage]);
+      challengeWords.push(word[this.settings.currentLanguage]);
       challengCount++;
     }
     return challengeWords;
@@ -46,10 +46,8 @@ export class WordChallengeComponent implements OnInit {
     // console.log(JSON.stringify(this.settings))
   }
   onSubmit(val: any) {
-    console.log(2, val, this.response)
- }
+    console.log(2, val, this.response);
+  }
 
- isAnswerCorrect() {
-
- }
+  isAnswerCorrect() {}
 }

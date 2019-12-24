@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "../translate.service";
+import { IDictionary } from "src/model/models";
 
 @Component({
   selector: "app-words-list",
@@ -7,13 +8,12 @@ import { TranslateService } from "../translate.service";
   styleUrls: ["./words-list.component.css"]
 })
 export class WordsListComponent implements OnInit {
-  dict: any
+  words: IDictionary;
+
   constructor(private translateService: TranslateService) {
-    this.words = this.translateService.getAllWords();
-    this.dict = this.translateService.getAllWords2();
+    this.words = this.translateService.getWords();
   }
 
-  words = [];
   formIsVisible = false;
 
   ngOnInit() {}

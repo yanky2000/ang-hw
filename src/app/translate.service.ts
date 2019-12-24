@@ -1,24 +1,19 @@
-import { IDict } from "./../model/models";
+import { IWord } from "./../model/models";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { IWord } from "src/model/models";
+import { IDictionary } from "src/model/models";
 
 @Injectable({
   providedIn: "root"
 })
 export class TranslateService {
   constructor(private httpClient: HttpClient) {}
-  initWords: IWord[] = [
-    { id: 1, dict: { ru: "Образование", en: "Education" } },
-    { id: 2, dict: { ru: "План", en: "Plan" } },
-    { id: 3, dict: { ru: "Работа", en: "Work" } }
-  ];
-  dict = new Map([[1, { ru: "кофе", en: "coffee" }]]);
 
-  dictionary = new Set([
-    { ru: "Образование", en: "Education" },
-    { ru: "План", en: "Plan" }
-  ]);
+  words: IDictionary = {
+    1: { ru: "Образование", en: "Education" },
+    2: { ru: "План", en: "Plan" },
+    3: { ru: "Работа", en: "Work" }
+  };
 
   url = "https://translate.yandex.net/api/v1.5/tr.json/translate";
   apiKey =
@@ -26,11 +21,8 @@ export class TranslateService {
   translatedWord = "";
   translateToLang = "ru-en";
 
-  getAllWords(): IWord[] {
-    return this.initWords;
-  }
-  getAllWords2(): any {
-    return this.dict.get(1);
+  getWords(): IDictionary {
+    return this.words;
   }
 
   fetchTranslation(text: string) {
@@ -39,9 +31,8 @@ export class TranslateService {
     );
   }
 
-  addWord(newWord: IDict) {
-    const newWordToAdd: IWord = { id: Date.now(), dict: { ...newWord } };
-    this.initWords.push(newWordToAdd);
-    console.log(this.initWords);
+  addWord(newWord: IWord) {
+    const newWordToAdd: IDictionary = { [Date.now()]: newWord };
+    this.words = { ...this.words, ...newWordToAdd };
   }
 }

@@ -3,12 +3,10 @@ import { LanguageKeys } from "./../constants";
 export interface ITranslation {
   text: string[];
 }
-export interface IWord {
-  id: number;
-  dict: IDict;
+export interface IDictionary {
+  [id: string]: IWord;
 }
-
-export interface IDict {
+export interface IWord {
   ru: string;
   en: string;
 }
