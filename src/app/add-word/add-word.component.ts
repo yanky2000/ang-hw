@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { of, fromEvent } from "rxjs";
+import { fromEvent } from "rxjs";
 import {
   debounceTime,
   map,
   distinctUntilChanged,
   filter
 } from "rxjs/operators";
-import { ITranslation, IWord, IDictionary } from "./../../model/models";
-import { TranslateService } from "../translate.service";
+import { ITranslation, IWord } from "./../../model/models";
+import { Store } from "../store.service";
 
 @Component({
   selector: "app-add-word",
@@ -16,11 +16,11 @@ import { TranslateService } from "../translate.service";
 })
 export class AddWordComponent implements OnInit {
   @ViewChild("searchWord", { static: true }) searchWord: ElementRef;
-  words: IDictionary;
+  words: IWord[];
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: Store) {
     this.isSearching = false;
-    this.words = this.translateService.getWords();
+    // this.words = this.translateService.words;
     this.translatedWord = this.translateService.translatedWord;
   }
 

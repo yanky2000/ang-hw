@@ -1,12 +1,9 @@
 <app-nav></app-nav>
 <h1>Word List</h1>
 <ul>
-  <li *ngFor="let word of words">{{ word.ru }} -{{ word.en }}</li>
+  <li *ngFor="let word of store.words$ | async">{{ word.ru }} -{{ word.en }}</li>
 </ul>
 <button (click)="toggleFormVisibility()">
   {{ formIsVisible ? "Hide" : "Show" }} form
 </button>
-<!-- <div *ngFor='let wo of dict'>
-  {{wo}}
-</div> -->
 <app-add-word *ngIf="formIsVisible"></app-add-word>

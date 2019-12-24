@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { TranslateService } from "../translate.service";
+import { Store } from "../store.service";
 import { IDictionary } from "src/model/models";
 
 @Component({
@@ -8,10 +8,9 @@ import { IDictionary } from "src/model/models";
   styleUrls: ["./words-list.component.css"]
 })
 export class WordsListComponent implements OnInit {
-  words: IDictionary;
+  words: any;
 
-  constructor(private translateService: TranslateService) {
-    this.words = this.translateService.getWords();
+  constructor(private store: Store) {
   }
 
   formIsVisible = false;

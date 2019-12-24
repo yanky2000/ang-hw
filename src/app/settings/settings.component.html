@@ -1,12 +1,18 @@
 <app-nav></app-nav>
 <section class="settings">
   <h1>Settings</h1>
-  <form action="" (ngSubmit)="onSubmit()" class="settings">
+  <form action="" (ngSubmit)="onSubmit(settings.value)" class="settings" #settings="ngForm">
     <label for="language">
       Language:
     </label>
-    <select class="input" name="language" id="language" [value]="ru" [(ngModel)]="settings.currentLanguage">
-      <option *ngFor="let lang of settings.languages" >{{ lang}}</option>
+    <select
+      class="input"
+      name="language"
+      id="language"
+      [value]="ru"
+      [(ngModel)]="store.settings.currentLanguage"
+    >
+      <option *ngFor="let lang of store.settings.languages">{{ lang }}</option>
     </select>
 
     <label for="wordsNum">Number of words:</label>
@@ -16,9 +22,9 @@
       name="numOfWords"
       id="wordsNum"
       min="1"
-      [(ngModel)]="settings.numOfWords"
+      [(ngModel)]="store.settings.numOfWords"
     />
-    
+
     <label for="time">Time for challenge, sec:</label>
     <input
       class="input"
@@ -26,9 +32,9 @@
       name="challengeTime"
       id="time"
       min="1"
-      [(ngModel)]="settings.time"
+      [(ngModel)]="store.settings.time"
     />
-    <button (onClick)="onSubmit()">Apply</button>
+    <button type="submit">Apply</button>
   </form>
   {{ challengeTime }}
   {{ numOfWords }}

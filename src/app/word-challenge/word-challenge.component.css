@@ -1,0 +1,15 @@
+.wrong-answer {
+  border: 1px solid red;
+}
+
+.right-answer {
+  border: 1px solid green;
+}
+
+.challenge-correct {
+  color: green;
+}
+
+.challenge-error {
+  color: red;
+}

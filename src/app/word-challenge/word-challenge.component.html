@@ -1,32 +1,26 @@
 <app-nav></app-nav>
 <h1>Word Challenge</h1>
 
-<!-- <div *ngFor='let word of initData'>{{word.dictdd.ru}}  - {{word.dict.en}}</div> -->
-<!-- <div *ngFor="let word of words">{{ word.dict.ru }} - {{ word.dict.en }}</div> -->
-<div>
-  <!-- Challenge {{currentChallenge.no}} -->
-</div>
-
-<div class="challenge-task">
-  <!-- {{ currentChallenge.word.dict.ru }} -->
-</div>
-<!-- {{ settings.currentLanguage }} -->
-<form (ngSubmit)="onSubmit()" #challengeForm="ngForm">
-  <!-- <div *ngFor="let word of getChallengeWords()"> -->
-    {{ word() }}
-    <label for="word"> - </label>
+<div *ngFor="let word of getChallengeWords()">
+  <form (ngSubmit)="onSubmit()" #challengeForm="ngForm">
+    <label for="word">{{ word.ru }} - </label>
     <input
       type="text"
       name="word"
       required
       placeholder="Введите здесь ответ"
-      id="word"
-      [(ngModel)] = 'response[word()]'
+      id="{{ word.ru }}"
+      [(ngModel)]="response[word.ru]"
+      [ngClass]="{ 'wrong-answer': status[word.ru] === 'wrong' }"
     />
-    <button type="submit" [disabled]='!challengeForm.form.valid'>Submit</button>
-  <!-- </div> -->
-</form>
-
-<div class="challenge-error" *ngIf="isError">
-  Неверно. Попробуйте еще раз!
+    <button (click)="onClick(word)" [disabled]="!challengeForm.form.valid">
+      Submit
+    </button>
+    <span class="challenge-error" *ngIf="status[word.ru] === 'wrong'">
+      Try again - you can do it!
+    </span>
+    <span class="challenge-correct" *ngIf="status[word.ru] === 'correct'"
+      >You rock!</span
+    >
+  </form>
 </div>

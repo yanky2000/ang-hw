@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { TranslateService } from "../translate.service";
+import { Store } from "../store.service";
 import { SettingsService } from "../settings.service";
-import { ISettings, IDictionary } from "src/model/models";
+import { ISettings, IWord } from "src/model/models";
 
 @Component({
   selector: "app-word-challenge",
@@ -10,44 +10,41 @@ import { ISettings, IDictionary } from "src/model/models";
 })
 export class WordChallengeComponent implements OnInit {
   settings: ISettings;
-  words: IDictionary;
-  response: any;
+  response: {};
+  status: {};
+  words: IWord[];
 
-  constructor(
-    private translateService: TranslateService,
-    private settingsService: SettingsService
-  ) {
-    this.words = this.translateService.getWords();
-    this.settings = this.settingsService.getSettings();
+  constructor(private store: Store) {
     this.response = {};
+    this.status = {};
   }
-  // TODO: 1. Get current challenge No from route,
-  // 2. display current challenge word according to router No
-  // 3. Go to next challenge if translation is correct.
 
   getChallengeWords() {
-    let challengCount = 0;
-    const challengeWords: string[] = [];
-
-    for (const word of this.words) {
-      if (challengCount > this.settings.numOfWords) {
-        return;
+    return this.store.words.reduce((acc, word, i) => {
+      if (i < this.settings.numOfWords) {
+        acc = [...acc, word];
       }
-      challengeWords.push(word[this.settings.currentLanguage]);
-      challengCount++;
-    }
-    return challengeWords;
+      return acc;
+    }, []);
   }
 
-  word() {
-    return this.getChallengeWords()[0];
-  }
   ngOnInit() {
-    // console.log(JSON.stringify(this.settings))
-  }
-  onSubmit(val: any) {
-    console.log(2, val, this.response);
+    this.store.settings$.subscribe(settings => {
+      this.settings = settings;
+    });
+    this.store.words$.subscribe(words => (this.words = words));
   }
 
-  isAnswerCorrect() {}
+  onSubmit() {}
+
+  onClick(word: IWord) {
+    const translation = this.response[word.ru];
+    if (word.en.toLowerCase() === translation.toLowerCase()) {
+      this.status[word.ru] = "correct";
+    } else {
+      this.status[word.ru] = "wrong";
+    }
+    console.log(this.status);
+  }
+
 }

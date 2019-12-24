@@ -1,3 +1,4 @@
+import { Store } from "./../store.service";
 import { Component, OnInit } from "@angular/core";
 import { SettingsService } from "../settings.service";
 import { ISettings } from "src/model/models";
@@ -8,13 +9,10 @@ import { ISettings } from "src/model/models";
   styleUrls: ["./settings.component.css"]
 })
 export class SettingsComponent implements OnInit {
-  settings: ISettings;
-  constructor(private settingService: SettingsService) {
-    this.settings = this.settingService.getSettings();
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {}
-  onSubmit() {
-    this.settingService.setSettings(this.settings);
+  onSubmit(val: ISettings) {
+    this.store.updateSettings(val);
   }
 }
