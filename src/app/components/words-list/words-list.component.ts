@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { DictionaryService } from "../dictionary.service";
 import { IWord } from "src/model/models";
 import { Subscription } from "rxjs";
+import { DictionaryService } from 'src/app/services/dictionary.service';
 
 @Component({
   selector: "app-words-list",

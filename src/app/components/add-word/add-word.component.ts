@@ -6,8 +6,8 @@ import {
   distinctUntilChanged,
   filter
 } from "rxjs/operators";
-import { ITranslation, IWord } from "./../../model/models";
-import { DictionaryService } from "../dictionary.service";
+import { DictionaryService } from 'src/app/services/dictionary.service';
+import { IWord, ITranslation } from "src/model/models";
 
 @Component({
   selector: "app-add-word",

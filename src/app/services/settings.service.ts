@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { LanguageKeys } from "./../constants";
-import { ISettings } from "src/model/models";
+import { LanguageKeys } from "../../constants";
+import { ISettings } from 'src/model/models';
 
 @Injectable({
   providedIn: "root"
@@ -30,6 +30,6 @@ export class SettingsService {
   }
 
   updateSettings(newSettings: Partial<ISettings>) {
-    this.settings = { ...this.settings, ...newSettings };
+    this.settings = {...this.settings, ...newSettings} ;
   }
 }

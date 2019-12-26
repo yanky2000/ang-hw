@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { DictionaryService } from "../dictionary.service";
-import { SettingsService } from "../settings.service";
 import { IWord, IChallengeState } from "src/model/models";
 import {
   ANSWER_KEYS,
@@ -8,8 +6,9 @@ import {
   TEST_COMPLETE,
   TEST_FAILED,
   LanguageKeys
-} from "./../../constants";
-import { analyzeAndValidateNgModules } from "@angular/compiler";
+} from "../../../constants";
+import { DictionaryService } from 'src/app/services/dictionary.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: "app-word-challenge",
@@ -52,8 +51,7 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
 
   startTimer() {
     this.state.timer = setInterval(() => {
-      // +1 to avoid showing 0
-      if (this.state.timeCount + 1 === this.settingsService.settings.time) {
+      if (this.state.timeCount === this.settingsService.settings.time) {
         this.stopTimer();
         this.state.resultMessage = TEST_FAILED;
       } else {

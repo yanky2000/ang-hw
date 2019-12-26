@@ -3,9 +3,9 @@
   <h1>Settings</h1>
   <form
     action=""
-    (ngSubmit)="onSubmit(settings.value)"
+    (ngSubmit)="onSubmit(set.value)"
     class="settings"
-    #settings="ngForm"
+    #set="ngForm"
   >
     <label for="language">
       Language:
@@ -14,12 +14,10 @@
       class="input"
       name="language"
       id="language"
-      [value]="ru"
-      [(ngModel)]="settingsService.settings.currentLanguage"
+      [value]="settings.currentLanguage"
+      [(ngModel)]="settings.currentLanguage"
     >
-      <option *ngFor="let lang of settingsService.settings.languages">{{
-        lang
-      }}</option>
+      <option *ngFor="let lang of settings.languages">{{ lang }}</option>
     </select>
 
     <label for="wordsNum">Number of words:</label>
@@ -29,7 +27,7 @@
       name="numOfWords"
       id="wordsNum"
       min="1"
-      [(ngModel)]="settingsService.settings.numOfWords"
+      [(ngModel)]="settings.numOfWords"
     />
 
     <label for="time">Time for challenge, sec:</label>
@@ -39,7 +37,8 @@
       name="challengeTime"
       id="time"
       min="1"
-      [(ngModel)]="settingsService.settings.time"
+      [(ngModel)]="settings.time"
     />
+    <button type="submit">Apply</button>
   </form>
 </section>

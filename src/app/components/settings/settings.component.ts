@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { SettingsService } from "../settings.service";
 import { ISettings } from "src/model/models";
+import { SettingsService } from "src/app/services/settings.service";
 
 @Component({
   selector: "app-settings",
@@ -8,9 +8,15 @@ import { ISettings } from "src/model/models";
   styleUrls: ["./settings.component.css"]
 })
 export class SettingsComponent implements OnInit {
-  constructor(private settingsService: SettingsService) {}
+  settings: ISettings;
+
+  constructor(private settingsService: SettingsService) {
+    this.settings = settingsService.settings;
+  }
 
   ngOnInit() {}
+
   onSubmit(settings: ISettings) {
+    this.settingsService.updateSettings(settings);
   }
 }
