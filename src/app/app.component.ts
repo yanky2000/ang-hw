@@ -5,11 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {  title = 'my-app';
-  message = 'hello from parent!'
-
-  counter = 0
-  onBubble(counter:number) {
-    this.counter = counter;
-  }
+export class AppComponent {  
 }

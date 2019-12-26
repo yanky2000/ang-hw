@@ -31,11 +31,11 @@ export type ILanguages = keyof typeof LanguageKeys;
 export interface IChallengeState {
   response: {};
   answerStatus: {};
-  timeCount: 0;
+  timeCount: number;
   isChallengeVisible: boolean;
-  // isResultVisible: boolean;
   resultMessage: string;
   timer: any;
   notification: keyof typeof NOTIFICATIONS;
   finalResult: keyof typeof ANSWER_KEYS | null;
+  settings?: ISettings;
 }

@@ -1,3 +1,11 @@
+button[type=submit] {
+  margin-left: 6px;
+}
+
+.restart-button,
+.word-item {
+  margin: 16px auto;
+}
 .wrong-answer {
   border: 1px solid red;
 }

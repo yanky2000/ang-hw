@@ -9,6 +9,7 @@ import {
   TEST_FAILED,
   LanguageKeys
 } from "./../../constants";
+import { analyzeAndValidateNgModules } from "@angular/compiler";
 
 @Component({
   selector: "app-word-challenge",
@@ -16,30 +17,33 @@ import {
   styleUrls: ["./word-challenge.component.css"]
 })
 export class WordChallengeComponent implements OnInit, OnDestroy {
-  static initialState: IChallengeState = {
-    response: {},
-    answerStatus: {},
-    timeCount: 0,
-    isChallengeVisible: false,
-    // isResultVisible: false,
-    resultMessage: "",
-    timer: 0,
-    notification: NOTIFICATIONS.EMPTY,
-    finalResult: null
-  };
+  static getInitialState() {
+    return {
+      response: {},
+      answerStatus: {},
+      timeCount: 0,
+      isChallengeVisible: false,
+      resultMessage: "",
+      timer: 0,
+      notification: NOTIFICATIONS.EMPTY,
+      finalResult: null,
+      settings: {}
+    };
+  }
 
   state: IChallengeState;
-  timer: any;
 
   constructor(
     private dictionary: DictionaryService,
     private settingsService: SettingsService
   ) {
-    this.state = { ...WordChallengeComponent.initialState };
+    this.state = {
+      ...WordChallengeComponent.getInitialState(),
+      settings: this.settingsService.settings
+    };
   }
 
   ngOnInit() {
-    this.state= {...WordChallengeComponent.initialState}
   }
 
   ngOnDestroy() {
@@ -47,7 +51,7 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
   }
 
   startTimer() {
-    this.timer = setInterval(() => {
+    this.state.timer = setInterval(() => {
       // +1 to avoid showing 0
       if (this.state.timeCount + 1 === this.settingsService.settings.time) {
         this.stopTimer();
@@ -58,10 +62,9 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  stopTimer() {
-    if (this.timer) {
-      console.error("stopping");
-      clearInterval(this.timer);
+  private stopTimer() {
+    if (this.state.timer) {
+      clearInterval(this.state.timer);
     }
   }
 
@@ -70,7 +73,6 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
   }
 
   start() {
-    console.log('start')
     this.startTimer();
     this.state.isChallengeVisible = true;
   }
@@ -145,9 +147,11 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
 
   reset() {
     this.stopTimer();
+
     this.state = {
-      ...WordChallengeComponent.initialState,
-      isChallengeVisible: true
+      ...WordChallengeComponent.getInitialState(),
+      isChallengeVisible: true,
+      settings: this.settingsService.settings
     };
     this.start();
   }

@@ -5,48 +5,54 @@
     {{ (state.isChallengeVisible ? "Close" : "Start") + " test" }}
   </button>
 </div>
-<section *ngIf="state.isChallengeVisible">
-  <div *ngFor="let word of getChallengeWords()">
+<section class="words-container" *ngIf="state.isChallengeVisible">
+  <div class="word-item" *ngFor="let word of getChallengeWords()">
     <form (ngSubmit)="onSubmit(word)" #challengeForm="ngForm">
-      <label for="word"
-        >{{ word[settingsService.settings.currentLanguage] }} -
-      </label>
+      <label for="word">{{ word[state.settings.currentLanguage] }} - </label>
       <input
         type="text"
         name="word"
         required
         placeholder="Введите здесь ответ"
-        id="{{ word[settingsService.settings.currentLanguage] }}"
-        [(ngModel)]="state.response[word[settingsService.settings.currentLanguage]]"
-        [ngClass]="{ 'wrong-answer': state.answerStatus[word.ru] === 'WRONG' }"
+        id="{{ word[state.settings.currentLanguage] }}"
+        [(ngModel)]="state.response[word[state.settings.currentLanguage]]"
+        [ngClass]="{
+          'wrong-answer':
+            state.answerStatus[word[state.settings.currentLanguage]] === 'WRONG'
+        }"
       />
       <button type="submit" [disabled]="!challengeForm.form.valid">
-        Submit
+        Check
       </button>
       <span
         class="challenge-error"
-        *ngIf="state.answerStatus[word[settingsService.settings.currentLanguage]] === 'WRONG'"
+        *ngIf="
+          state.answerStatus[word[state.settings.currentLanguage]] === 'WRONG'
+        "
       >
-        Try again - you can do it!
+        Nope!
       </span>
       <span
         class="challenge-correct"
-        *ngIf="state.answerStatus[word[settingsService.settings.currentLanguage]] === 'CORRECT'"
+        *ngIf="
+          state.answerStatus[word[state.settings.currentLanguage]] === 'CORRECT'
+        "
         >You rock!</span
       >
     </form>
   </div>
   <div>
-    <div *ngIf="true">
-      Осталось секунд: {{ settingsService.settings.time - state.timeCount }}
+   <div *ngIf="(state.finalResult !== 'CORRECT')">
+      Осталось секунд: {{ state.settings.time - state.timeCount }}
     </div>
     <div
       *ngIf="state.resultMessage"
       [ngClass]="state.finalResult === 'CORRECT' ? 'success' : 'error'"
     >
       {{ state.resultMessage }}
+      <span *ngIf="state.finalResult === 'CORRECT'">за {{state.timeCount}} сек.</span>
     </div>
   </div>
 
-  <button (click)="reset()">Restart test</button>
+  <button class="restart-button" (click)="reset()">Restart test</button>
 </section>

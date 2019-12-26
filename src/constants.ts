@@ -27,4 +27,4 @@ export enum NOTIFICATIONS {
 export type IAllNotifications = keyof typeof NOTIFICATIONS;
 
 export const TEST_FAILED = "TEST FAILED!";
-export const TEST_COMPLETE = "TEST COMPLETE!";
+export const TEST_COMPLETE = "TEST COMPLETED";

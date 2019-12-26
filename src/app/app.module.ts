@@ -4,8 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from "./app.component";
-import { MyPipePipe } from "./my-pipe.pipe";
-import { MyDirectiveDirective } from "./my-directive.directive";
 import { WordChallengeComponent } from "./word-challenge/word-challenge.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { WordsListComponent } from "./words-list/words-list.component";
@@ -18,8 +16,6 @@ import { NavComponent } from "./nav/nav.component";
 @NgModule({
   declarations: [
     AppComponent,
-    MyPipePipe,
-    MyDirectiveDirective,
     WordChallengeComponent,
     SettingsComponent,
     WordsListComponent,

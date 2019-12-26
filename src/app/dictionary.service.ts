@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, merge } from "rxjs";
-import { LanguageKeys } from "../constants";
-import { IWord, ISettings } from "../model/models";
+import { BehaviorSubject } from "rxjs";
+import { IWord } from "../model/models";
 
 @Injectable({
   providedIn: "root"
@@ -54,5 +53,4 @@ export class DictionaryService {
       word => word.ru.toLowerCase() === wordToRemove.ru.toLowerCase()
     ));
   }
-
 }

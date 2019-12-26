@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { fromEvent } from "rxjs";
+import { fromEvent, Subscription } from "rxjs";
 import {
   debounceTime,
   map,
@@ -14,7 +14,7 @@ import { DictionaryService } from "../dictionary.service";
   templateUrl: "./add-word.component.html",
   styleUrls: ["./add-word.component.css"]
 })
-export class AddWordComponent implements OnInit {
+export class AddWordComponent implements OnInit  {
   @ViewChild("searchWord", { static: true }) searchWord: ElementRef;
   words: IWord[];
 
@@ -29,7 +29,8 @@ export class AddWordComponent implements OnInit {
   newWord = "";
   translated = "";
   feedback = () =>
-    `Добавить слово ${this.newWord} (${this.translatedWord}) в словарь?`
+    `Добавить слово ${this.newWord} (${this.translatedWord}) в словарь?`;
+  sub: Subscription;
 
   ngOnInit() {
     fromEvent(this.searchWord.nativeElement, "keyup")

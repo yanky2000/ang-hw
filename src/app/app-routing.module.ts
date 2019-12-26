@@ -6,9 +6,9 @@ import { WordChallengeComponent } from "./word-challenge/word-challenge.componen
 import { SettingsComponent } from "./settings/settings.component";
 
 const routes: Routes = [
-  { path: "words", component: WordsListComponent },
+  { path: "dictionary", component: WordsListComponent },
   { path: "settings", component: SettingsComponent },
-  { path: "challenge", component: WordChallengeComponent },
+  { path: "excersices", component: WordChallengeComponent },
   { path: "", redirectTo: "/words", pathMatch: "full" },
   { path: "**", component: PageNotFoundComponent }
 ];
