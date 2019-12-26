@@ -13,3 +13,13 @@
 .challenge-error {
   color: red;
 }
+
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}
+.error {
+  color: red
+}

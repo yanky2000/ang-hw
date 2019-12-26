@@ -1,26 +1,38 @@
-<app-nav></app-nav>
-<h1>Word Challenge</h1>
-
-<div *ngFor="let word of getChallengeWords()">
-  <form (ngSubmit)="onSubmit()" #challengeForm="ngForm">
-    <label for="word">{{ word.ru }} - </label>
-    <input
-      type="text"
-      name="word"
-      required
-      placeholder="Введите здесь ответ"
-      id="{{ word.ru }}"
-      [(ngModel)]="response[word.ru]"
-      [ngClass]="{ 'wrong-answer': status[word.ru] === 'wrong' }"
-    />
-    <button (click)="onClick(word)" [disabled]="!challengeForm.form.valid">
-      Submit
-    </button>
-    <span class="challenge-error" *ngIf="status[word.ru] === 'wrong'">
-      Try again - you can do it!
-    </span>
-    <span class="challenge-correct" *ngIf="status[word.ru] === 'correct'"
-      >You rock!</span
-    >
-  </form>
+<app-nav></app-nav> <h1>Word Challenge</h1> <div> <button (click)="toggleVisibility()"> {{ (isChallengeVisible ? "Close" : "Open") + " test" }}
+  </button>
 </div>
+<section *ngIf="state.isChallengeVisible">
+  <div *ngFor="let word of getChallengeWords()">
+    <form (ngSubmit)="onSubmit(word)" #challengeForm="ngForm">
+      <label for="word">{{ word.ru }} - </label>
+      <input
+        type="text"
+        name="word"
+        required
+        placeholder="Введите здесь ответ"
+        id="{{ word.ru }}"
+        [(ngModel)]="state.response[word.ru]"
+        [ngClass]="{ 'wrong-answer': state.answerStatus[word.ru] === 'WRONG' }"
+      />
+      <button type="submit" [disabled]="!challengeForm.form.valid">
+        Submit
+      </button>
+      <span class="challenge-error" *ngIf="state.answerStatus[word.ru] === 'wrong'">
+        Try again - you can do it!
+      </span>
+      <span
+        class="challenge-correct"
+        *ngIf="state.answerStatus[word.ru] === 'CORRECT'"
+        >You rock!</span
+      >
+    </form>
+  </div>
+  <div>
+    <div *ngIf="!state.challengeResult">
+      Осталось секунд: {{ settingsService.settings.time - state.timeCount }}
+    </div>
+    <div *ngIf="state.challengeResult" [ngClass]="'error'">{{ state.challengeResult }}</div>
+  </div>
+  <button (click)="reset()">Start test</button>
+</section>
+{{state.finalResult}}

@@ -1,38 +1,30 @@
-import { LanguageKeys, langMap } from "./../constants";
 import { Injectable } from "@angular/core";
-import { SettingProperties } from "src/constants";
+import { BehaviorSubject } from "rxjs";
+import { LanguageKeys } from "./../constants";
 import { ISettings } from "src/model/models";
 
 @Injectable({
   providedIn: "root"
 })
 export class SettingsService {
-  settings: ISettings;
-  constructor() {
-    this.settings = {
-      challengeNo: 1,
-      numOfWords: 3,
-      time: 10,
-      currentLanguage: LanguageKeys.ru,
-      languages: [LanguageKeys.ru, LanguageKeys.en]
-    };
+  constructor() {}
+  private readonly _settings = new BehaviorSubject<ISettings>({
+    challengeNo: 1,
+    numOfWords: 3,
+    time: 1223,
+    currentLanguage: LanguageKeys.ru,
+    languages: [LanguageKeys.ru, LanguageKeys.en]
+  });
+  readonly settings$ = this._settings.asObservable();
+
+  get settings() {
+    return this._settings.getValue();
+  }
+  set settings(newSettings) {
+    this._settings.next(newSettings);
   }
 
-  getChallengeTime() {
-    return this.settings.time;
-  }
-  getChallengesNo() {
-    return this.settings.challengeNo;
-  }
-  getChallengeLange() {
-    return this.settings.currentLanguage;
-  }
-
-  getSettings(): ISettings {
-    return this.settings;
-  }
-
-  setSettings(newSettings: Partial<ISettings>) {
+  updateSettings(newSettings: Partial<ISettings>) {
     this.settings = { ...this.settings, ...newSettings };
   }
 }

@@ -10,9 +10,9 @@
       name="language"
       id="language"
       [value]="ru"
-      [(ngModel)]="store.settings.currentLanguage"
+      [(ngModel)]="settingsService.settings.currentLanguage"
     >
-      <option *ngFor="let lang of store.settings.languages">{{ lang }}</option>
+      <option *ngFor="let lang of settingsService.settings.languages">{{ lang }}</option>
     </select>
 
     <label for="wordsNum">Number of words:</label>
@@ -22,7 +22,7 @@
       name="numOfWords"
       id="wordsNum"
       min="1"
-      [(ngModel)]="store.settings.numOfWords"
+      [(ngModel)]="settingsService.settings.numOfWords"
     />
 
     <label for="time">Time for challenge, sec:</label>
@@ -32,13 +32,13 @@
       name="challengeTime"
       id="time"
       min="1"
-      [(ngModel)]="store.settings.time"
+      [(ngModel)]="settingsService.settings.time"
     />
     <button type="submit">Apply</button>
   </form>
-  {{ challengeTime }}
-  {{ numOfWords }}
-  {{ language }}
+  {{ settingsService.settings.time }}
+  {{ settingsService.settings.numOfWords }}
+  {{ settingsService.settings.currentLanguage }}
 </section>
 
 <style>

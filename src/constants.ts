@@ -12,3 +12,16 @@ export const langMap = {
   [LanguageKeys.ru]: { name: "Russian", key: "ru" },
   [LanguageKeys.en]: { name: "English", key: "en" }
 };
+
+export enum ANSWER_KEYS {
+  CORRECT = "CORRECT",
+  WRONG = "WRONG"
+}
+export enum NOTIFICATIONS {
+  FAILED = "FAILED",
+  SUCCESS = "SUCCESS",
+  STOPPED = "STOPPED",
+  EMPTY = "EMPTY"
+}
+
+export type IAllNotifications = keyof typeof NOTIFICATIONS;

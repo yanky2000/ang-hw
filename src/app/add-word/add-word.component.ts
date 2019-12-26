@@ -7,7 +7,7 @@ import {
   filter
 } from "rxjs/operators";
 import { ITranslation, IWord } from "./../../model/models";
-import { Store } from "../store.service";
+import { DictionaryService } from "../dictionary.service";
 
 @Component({
   selector: "app-add-word",
@@ -18,19 +18,18 @@ export class AddWordComponent implements OnInit {
   @ViewChild("searchWord", { static: true }) searchWord: ElementRef;
   words: IWord[];
 
-  constructor(private translateService: Store) {
+  constructor(private dictionary: DictionaryService) {
     this.isSearching = false;
-    // this.words = this.translateService.words;
-    this.translatedWord = this.translateService.translatedWord;
+    this.translatedWord = this.dictionary.translatedWord;
   }
 
   isSearching = false;
   formIsVisible = false;
   translatedWord = "";
   newWord = "";
-  translated: any = "";
+  translated = "";
   feedback = () =>
-    `Добавить слово ${this.newWord} (${this.translatedWord}) в словарь?`;
+    `Добавить слово ${this.newWord} (${this.translatedWord}) в словарь?`
 
   ngOnInit() {
     fromEvent(this.searchWord.nativeElement, "keyup")
@@ -66,12 +65,12 @@ export class AddWordComponent implements OnInit {
 
   onSubmit() {
     const newWord: IWord = { ru: this.newWord, en: this.translatedWord };
-    this.translateService.addWord(newWord);
+    this.dictionary.addWord(newWord);
     this.resetSearch();
   }
 
   getTranslation(str?: string) {
-    return this.translateService.fetchTranslation(this.newWord);
+    return this.dictionary.fetchTranslation(this.newWord);
   }
 
   resetSearch() {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Store } from "../store.service";
-import { IDictionary } from "src/model/models";
+import { DictionaryService } from "../dictionary.service";
 
 @Component({
   selector: "app-words-list",
@@ -10,7 +9,7 @@ import { IDictionary } from "src/model/models";
 export class WordsListComponent implements OnInit {
   words: any;
 
-  constructor(private store: Store) {
+  constructor(private dictionary: DictionaryService) {
   }
 
   formIsVisible = false;
