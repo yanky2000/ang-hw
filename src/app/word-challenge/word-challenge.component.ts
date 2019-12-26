@@ -2,7 +2,13 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DictionaryService } from "../dictionary.service";
 import { SettingsService } from "../settings.service";
 import { IWord, IChallengeState } from "src/model/models";
-import { ANSWER_KEYS, NOTIFICATIONS } from "./../../constants";
+import {
+  ANSWER_KEYS,
+  NOTIFICATIONS,
+  TEST_COMPLETE,
+  TEST_FAILED,
+  LanguageKeys
+} from "./../../constants";
 
 @Component({
   selector: "app-word-challenge",
@@ -10,49 +16,52 @@ import { ANSWER_KEYS, NOTIFICATIONS } from "./../../constants";
   styleUrls: ["./word-challenge.component.css"]
 })
 export class WordChallengeComponent implements OnInit, OnDestroy {
-  static initalState: IChallengeState = {
+  static initialState: IChallengeState = {
     response: {},
     answerStatus: {},
     timeCount: 0,
     isChallengeVisible: false,
-    isResultVisible: false,
-    challengeResult: "",
+    // isResultVisible: false,
+    resultMessage: "",
     timer: 0,
     notification: NOTIFICATIONS.EMPTY,
     finalResult: null
   };
 
   state: IChallengeState;
+  timer: any;
 
   constructor(
     private dictionary: DictionaryService,
     private settingsService: SettingsService
   ) {
-    this.state = WordChallengeComponent.initalState;
+    this.state = { ...WordChallengeComponent.initialState };
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.state= {...WordChallengeComponent.initialState}
+  }
 
   ngOnDestroy() {
     this.stopTimer();
   }
 
   startTimer() {
-    this.state.timer = setInterval(() => {
+    this.timer = setInterval(() => {
       // +1 to avoid showing 0
       if (this.state.timeCount + 1 === this.settingsService.settings.time) {
         this.stopTimer();
-        this.state.challengeResult = "test failed";
+        this.state.resultMessage = TEST_FAILED;
       } else {
-        this.state.timeCount += 1;
+        this.state.timeCount++;
       }
     }, 1000);
   }
 
   stopTimer() {
-    console.error("stopping");
-    if (this.state.timer) {
-      clearInterval(this.state.timer);
+    if (this.timer) {
+      console.error("stopping");
+      clearInterval(this.timer);
     }
   }
 
@@ -61,6 +70,7 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
   }
 
   start() {
+    console.log('start')
     this.startTimer();
     this.state.isChallengeVisible = true;
   }
@@ -80,12 +90,20 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
   }
 
   check(word: IWord): boolean {
-    const translation = this.state.response[word.ru];
-    if (word.en.toLowerCase() === translation.toLowerCase()) {
-      this.state.answerStatus[word.ru] = ANSWER_KEYS.CORRECT;
+    const translation = this.state.response[
+      word[this.settingsService.settings.currentLanguage]
+    ];
+    const w = word[this.settingsService.settings.currentLanguage];
+    const inputLang =
+      this.settingsService.settings.currentLanguage === LanguageKeys.en
+        ? LanguageKeys.ru
+        : LanguageKeys.en;
+
+    if (word[inputLang].toLowerCase() === translation.toLowerCase()) {
+      this.state.answerStatus[w] = ANSWER_KEYS.CORRECT;
       return true;
     } else {
-      this.state.answerStatus[word.ru] = ANSWER_KEYS.WRONG;
+      this.state.answerStatus[w] = ANSWER_KEYS.WRONG;
       return false;
     }
   }
@@ -102,25 +120,35 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
       this.getChallengeWords().length;
 
     if (isAllAnswersProvided) {
-      this.checkAllAnswers();
+      const output = this.checkAllAnswers();
+      if (output) {
+        this.state.resultMessage = TEST_COMPLETE;
+      } else {
+        this.state.resultMessage = TEST_FAILED;
+      }
     }
   }
 
   checkAllAnswers() {
+    let result = false;
     const isAllAnswersCorrect = Object.values(this.state.answerStatus).every(
       answer => answer === ANSWER_KEYS.CORRECT
     );
 
     if (isAllAnswersCorrect) {
       this.state.finalResult = ANSWER_KEYS.CORRECT;
+      this.stopTimer();
+      result = true;
     }
+    return result;
   }
 
   reset() {
-    console.log(1111);
-    // this.stopTimer();
-    clearInterval(this.state.timer);
-    this.state = WordChallengeComponent.initalState;
+    this.stopTimer();
+    this.state = {
+      ...WordChallengeComponent.initialState,
+      isChallengeVisible: true
+    };
     this.start();
   }
 }

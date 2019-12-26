@@ -11,7 +11,7 @@ export class SettingsService {
   private readonly _settings = new BehaviorSubject<ISettings>({
     challengeNo: 1,
     numOfWords: 3,
-    time: 1223,
+    time: 133,
     currentLanguage: LanguageKeys.ru,
     languages: [LanguageKeys.ru, LanguageKeys.en]
   });

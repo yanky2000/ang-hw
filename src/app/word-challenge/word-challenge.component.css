@@ -6,10 +6,12 @@
   border: 1px solid green;
 }
 
+.success,
 .challenge-correct {
   color: green;
 }
 
+.error,
 .challenge-error {
   color: red;
 }
@@ -19,7 +21,4 @@
 }
 .visible {
   display: block;
-}
-.error {
-  color: red
 }

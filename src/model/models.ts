@@ -1,4 +1,9 @@
-import { LanguageKeys, NOTIFICATIONS, IAllNotifications, ANSWER_KEYS } from "./../constants";
+import {
+  LanguageKeys,
+  NOTIFICATIONS,
+  IAllNotifications,
+  ANSWER_KEYS
+} from "./../constants";
 
 export interface ITranslation {
   text: string[];
@@ -25,10 +30,11 @@ export type ILanguages = keyof typeof LanguageKeys;
 
 export interface IChallengeState {
   response: {};
-  answerStatus: {}; timeCount: 0;
+  answerStatus: {};
+  timeCount: 0;
   isChallengeVisible: boolean;
-  isResultVisible: boolean;
-  challengeResult: string;
+  // isResultVisible: boolean;
+  resultMessage: string;
   timer: any;
   notification: keyof typeof NOTIFICATIONS;
   finalResult: keyof typeof ANSWER_KEYS | null;

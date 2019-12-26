@@ -1,7 +1,12 @@
 <app-nav></app-nav>
 <section class="settings">
   <h1>Settings</h1>
-  <form action="" (ngSubmit)="onSubmit(settings.value)" class="settings" #settings="ngForm">
+  <form
+    action=""
+    (ngSubmit)="onSubmit(settings.value)"
+    class="settings"
+    #settings="ngForm"
+  >
     <label for="language">
       Language:
     </label>
@@ -12,7 +17,9 @@
       [value]="ru"
       [(ngModel)]="settingsService.settings.currentLanguage"
     >
-      <option *ngFor="let lang of settingsService.settings.languages">{{ lang }}</option>
+      <option *ngFor="let lang of settingsService.settings.languages">{{
+        lang
+      }}</option>
     </select>
 
     <label for="wordsNum">Number of words:</label>
@@ -34,25 +41,5 @@
       min="1"
       [(ngModel)]="settingsService.settings.time"
     />
-    <button type="submit">Apply</button>
   </form>
-  {{ settingsService.settings.time }}
-  {{ settingsService.settings.numOfWords }}
-  {{ settingsService.settings.currentLanguage }}
 </section>
-
-<style>
-  label {
-    margin-top: 8px;
-  }
-  .settings {
-    display: flex;
-    flex-direction: column;
-  }
-  button {
-    width: 50px;
-  }
-  .input {
-    width: 200px;
-  }
-</style>
