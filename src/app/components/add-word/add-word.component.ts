@@ -6,7 +6,7 @@ import {
   distinctUntilChanged,
   filter
 } from "rxjs/operators";
-import { DictionaryService } from 'src/app/services/dictionary.service';
+import { DictionaryService } from "src/app/services/dictionary.service";
 import { IWord, ITranslation } from "src/model/models";
 
 @Component({
@@ -14,9 +14,10 @@ import { IWord, ITranslation } from "src/model/models";
   templateUrl: "./add-word.component.html",
   styleUrls: ["./add-word.component.css"]
 })
-export class AddWordComponent implements OnInit  {
+export class AddWordComponent implements OnInit {
   @ViewChild("searchWord", { static: true }) searchWord: ElementRef;
   words: IWord[];
+  sub: Subscription;
 
   constructor(private dictionary: DictionaryService) {
     this.isSearching = false;
@@ -30,7 +31,6 @@ export class AddWordComponent implements OnInit  {
   translated = "";
   feedback = () =>
     `Добавить слово ${this.newWord} (${this.translatedWord}) в словарь?`;
-  sub: Subscription;
 
   ngOnInit() {
     fromEvent(this.searchWord.nativeElement, "keyup")

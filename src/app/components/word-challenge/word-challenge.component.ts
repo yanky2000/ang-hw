@@ -7,8 +7,8 @@ import {
   TEST_FAILED,
   LanguageKeys
 } from "../../../constants";
-import { DictionaryService } from 'src/app/services/dictionary.service';
-import { SettingsService } from 'src/app/services/settings.service';
+import { DictionaryService } from "src/app/services/dictionary.service";
+import { SettingsService } from "src/app/services/settings.service";
 
 @Component({
   selector: "app-word-challenge",
@@ -16,6 +16,9 @@ import { SettingsService } from 'src/app/services/settings.service';
   styleUrls: ["./word-challenge.component.css"]
 })
 export class WordChallengeComponent implements OnInit, OnDestroy {
+
+  state: IChallengeState;
+
   static getInitialState() {
     return {
       response: {},
@@ -30,8 +33,6 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
     };
   }
 
-  state: IChallengeState;
-
   constructor(
     private dictionary: DictionaryService,
     private settingsService: SettingsService
@@ -42,8 +43,7 @@ export class WordChallengeComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.stopTimer();

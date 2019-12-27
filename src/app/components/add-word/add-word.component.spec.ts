@@ -1,16 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from "@angular/forms";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AddWordComponent } from './add-word.component';
+import { AddWordComponent } from "./add-word.component";
 
-describe('AddWordComponent', () => {
+describe("AddWordComponent", () => {
   let component: AddWordComponent;
   let fixture: ComponentFixture<AddWordComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddWordComponent ]
-    })
-    .compileComponents();
+      declarations: [AddWordComponent],
+      imports: [FormsModule, HttpClientModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('AddWordComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

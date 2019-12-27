@@ -1,16 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { WordChallengeComponent } from './word-challenge.component';
+import { WordChallengeComponent } from "./word-challenge.component";
+import { NavComponent } from "../nav/nav.component";
 
-describe('WordChallengeComponent', () => {
+describe("WordChallengeComponent", () => {
   let component: WordChallengeComponent;
   let fixture: ComponentFixture<WordChallengeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WordChallengeComponent ]
-    })
-    .compileComponents();
+      declarations: [WordChallengeComponent, NavComponent], 
+      imports: [FormsModule, HttpClientModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +22,7 @@ describe('WordChallengeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
