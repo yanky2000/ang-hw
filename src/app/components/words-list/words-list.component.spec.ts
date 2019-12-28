@@ -1,5 +1,4 @@
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AddWordComponent } from "./../add-word/add-word.component";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
@@ -15,7 +14,6 @@ describe("WordsListComponent", () => {
     TestBed.configureTestingModule({
       declarations: [WordsListComponent, NavComponent, AddWordComponent],
       imports: [FormsModule, HttpClientModule],
-      // providers: [ , HttpClient]
     }).compileComponents();
   }));
 

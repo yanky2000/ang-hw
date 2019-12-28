@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
-import { IWord } from 'src/model/models';
+import { IWord } from "src/model/models";
+import { environment } from "src/environments/environment.prod";
 
 @Injectable({
   providedIn: "root"
@@ -26,8 +27,7 @@ export class DictionaryService {
   }
 
   url = "https://translate.yandex.net/api/v1.5/tr.json/translate";
-  apiKey =
-    "trnsl.1.1.20191219T175535Z.a8f7c538ee433210.bf031d9de146dd06ce73efca542cc93eb7a18f36";
+  apiKey = environment.apiKey;
   translatedWord = "";
   translateToLang = "ru-en";
 

@@ -1,6 +1,6 @@
 # Приложение для перевода слов
 
-Для работы необходим apiKey от Yandex.translate - вставить в файле `src/app/services/dictionary.service.ts`
+Для работы необходим apiKey от Yandex.translate - вставить в файле `environments/environment.prod`
 
 Запуск приложения `ng serve` -  localhost:4200
 
